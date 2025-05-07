@@ -1,22 +1,28 @@
-import { getEventsCollection } from "@/lib/database/db"
-import { NextResponse } from "next/server"
+import { createEvent, getEvents } from '@/lib/actions/event.actions';
+import { NextResponse } from 'next/server';
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   try {
-    const body = await req.json()
-    const eventsCollection = await getEventsCollection()
+    const body = await request.json();
+    const eventId = await createEvent(body);
     
-    const result = await eventsCollection.insertOne({
-      ...body,
-      createdAt: new Date(),
-    })
-
-    return NextResponse.json(result)
-  } catch (error) {
-    console.error("Event creation error:", error)
+    return NextResponse.json({ success: true, eventId });
+  } catch {
     return NextResponse.json(
-      { error: "Failed to create event" },
+      { success: false, error: 'Failed to create event' },
       { status: 500 }
-    )
+    );
+  }
+}
+
+export async function GET() {
+  try {
+    const events = await getEvents();
+    return NextResponse.json(events);
+  } catch {
+    return NextResponse.json(
+      { error: 'Failed to fetch events' },
+      { status: 500 }
+    );
   }
 }
