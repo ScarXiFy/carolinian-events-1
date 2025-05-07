@@ -1,3 +1,5 @@
+// edit UI here !!!
+
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import { EventForm } from '@/components/event-form';

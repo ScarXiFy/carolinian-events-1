@@ -1,4 +1,5 @@
-// components/header.tsx
+// edit UI here !!!
+
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server"; // Updated import
