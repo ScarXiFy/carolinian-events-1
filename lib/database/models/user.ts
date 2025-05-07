@@ -1,5 +1,6 @@
 import {Document, Schema, model, models} from 'mongoose';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface IUser extends Document {
   _id: string;
   clerkId: string;
